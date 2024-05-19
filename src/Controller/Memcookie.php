@@ -108,6 +108,11 @@ class Memcookie
         // check if the user is authorized. We attempt to authenticate the user if not
         $s->requireAuth();
 
+        // add the \SimpleSAML\Utils\HTTP object if not existing
+        if (!$this->http_utils) {
+            $this->setHttpUtils(new Utils\HTTP());
+        }
+
         // generate session id and save it in a cookie
         $randomUtils = new Utils\Random();
         $sessionID = $randomUtils->generateID();
